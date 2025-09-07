@@ -156,7 +156,7 @@ void listBooks(){
     printf("\n");
     printf("\n");
 
-    while(books[i].autheur[0] != '\0' && i < MAX_BOOKS_NUMBER){
+    while(i < MAX_BOOKS_NUMBER && books[i].autheur[0] != '\0'){
         count++;
         printf("--------------------------------------\n");
         printf("le livre N'%d:\n", i + 1);
@@ -192,7 +192,7 @@ void searchForBook(){
 
     titre[strcspn(titre, "\n")] = '\0';
 
-    while(books[i].autheur != '\0' && i < MAX_BOOKS_NUMBER){
+    while(i < MAX_BOOKS_NUMBER && books[i].autheur != '\0'){
         count++;
         if(stringCompare(books[i].titre, titre)){
             found = true;
@@ -232,7 +232,7 @@ void deleteBook(){
 
     titre[strcspn(titre, "\n")] = '\0';
 
-    while(books[i].autheur != '\0' && i < MAX_BOOKS_NUMBER){
+    while(i < MAX_BOOKS_NUMBER && books[i].autheur != '\0'){
         if(stringCompare(books[i].titre, titre)) {
             found = true;
             break;
@@ -263,7 +263,7 @@ void showTotalBooks(){
     int i = 0;
     int count = 0;
 
-    while(books[i].autheur[0] != '\0' && i < MAX_BOOKS_NUMBER){
+    while(i < MAX_BOOKS_NUMBER && books[i].autheur[0] != '\0'){
         total += books[i].quantite;
         count++;
         i++;
@@ -289,7 +289,7 @@ void changeQuantity(){
     fgets(titre, sizeof(titre), stdin);
     titre[strcspn(titre, "\n")] = '\0';
 
-    while(books[i].autheur[0] != '\0' && i < MAX_BOOKS_NUMBER){
+    while(i < MAX_BOOKS_NUMBER && books[i].autheur[0] != '\0'){
         count++;
         if(stringCompare(books[i].titre, titre)){
             found = true;
