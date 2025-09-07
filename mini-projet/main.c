@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 #define MAX_BOOKS_NUMBER 100
 
 struct Book{
@@ -15,13 +14,84 @@ struct Book{
 
 struct Book books[MAX_BOOKS_NUMBER] = {0};
 
+void cleanInputBuffer();
+bool stringCompare(char str1[], char str2[]);
+void addBook();
+void listBooks();
+void searchForBook();
+void deleteBook();
+void showTotalBooks();
+void changeQuantity();
+
+
+int main (){
+    bool breakIt = false;
+    int choix = 0;
+    
+    do {
+        printf("\n");
+        printf("\n");
+        printf("******************************************************************\n");
+        printf("*                 Welcome to mohammed's library                  *\n");
+        printf("*----------------------------------------------------------------*\n");
+        printf("*                 1.Ajouter un livre.                            *\n");
+        printf("*                 2.Listez tous les livres disponibles.          *\n");
+        printf("*                 3.Rechercher un livre par son nom.             *\n");
+        printf("*                 4.Mettre a jour la quantite d'un livre.        *\n");
+        printf("*                 5.Supprimer un livre.                          *\n");
+        printf("*                 6.Afficher le nombre total de livres.          *\n");
+        printf("*                 7.Sortie the program.                          *\n");
+        printf("******************************************************************\n");
+
+        scanf("%d", &choix);
+        cleanInputBuffer();
+        
+        switch (choix)
+            {
+            case 1:
+                printf("Ajouter un livre.\n");
+                addBook();
+                break;
+            case 2:
+                printf("Listez tous les livres disponibles.\n");
+                listBooks();
+                break;
+            case 3:
+                printf("Rechercher un livre par son nom.\n");
+                searchForBook();
+                break;
+            case 4:
+                printf("Mettre à jour la quantite d'un livre.\n");
+                changeQuantity();
+                break;
+            case 5:
+                printf("Supprimer un livre.\n");
+                deleteBook();
+                break;
+            case 6:
+                printf("Afficher le nombre total de livres.\n");
+                showTotalBooks();
+                break;
+            case 7:
+                printf("Sortie.\n");
+                breakIt = true;
+                break;
+                
+            default:
+                printf("Input Invalide.\n");
+                break;
+            }
+    } while (!breakIt);
+
+    return 0;
+}
 
 void cleanInputBuffer(){
     int c;
     while((c = getchar()) != '\n' && c != EOF);
 }
 
-bool stringCompair(char str1[], char str2[]){
+bool stringCompare(char str1[], char str2[]){
     int i = 0;
     while(str1[i] != '\0' && str2[i] != '\0'){
         if(tolower(str1[i]) != tolower(str2[i])){
@@ -102,13 +172,13 @@ void listBooks(){
         printf("Aucun livre disponible pour etre imprime.\n");
         return;
     }
-    printf("Tous les livres disponibles ont ete imprimes !!!\n");
+    printf("Tous les livres disponibles ont ete imprimes!!!\n");
     printf("\n");
     printf("\n");
 }
 
-void searchForABook(){
-
+void searchForBook(){
+ 
     char titre[100];
     int i = 0;
     int count = 0;
@@ -124,7 +194,7 @@ void searchForABook(){
 
     while(books[i].autheur != '\0' && i < MAX_BOOKS_NUMBER){
         count++;
-        if(stringCompair(books[i].titre, titre)){
+        if(stringCompare(books[i].titre, titre)){
             found = true;
             break;
         }
@@ -157,13 +227,13 @@ void deleteBook(){
     int count = 0;
     bool found = false;
 
-    printf("écrivez le titre du livre que vous souhaitez supprimer : ");
+    printf("Ecrivez le titre du livre que vous souhaitez supprimer : ");
     fgets(titre, sizeof(titre), stdin);
 
     titre[strcspn(titre, "\n")] = '\0';
 
     while(books[i].autheur != '\0' && i < MAX_BOOKS_NUMBER){
-        if(stringCompair(books[i].titre, titre)) {
+        if(stringCompare(books[i].titre, titre)) {
             found = true;
             break;
         } 
@@ -204,68 +274,43 @@ void showTotalBooks(){
         return;
     }
 
-    printf("The mount of books available in the library is : %d", total);
+    printf("La quantite de livres disponibles dans la bibliotheque est : %d", total);
 
 }
 
-
-int main (){
-    bool breakIt = false;
-    int choix = 0;
+void changeQuantity(){
+    char titre[100];
+    int i = 0, count = 0, newQuantity = 0;
+    bool found = false;
     
-    do {
-        printf("\n");
-        printf("\n");
-        printf("******************************************************************\n");
-        printf("*                 Welcome to mohammed's library                  *\n");
-        printf("*----------------------------------------------------------------*\n");
-        printf("*                 1.Ajouter un livre.                            *\n");
-        printf("*                 2.Listez tous les livres disponibles.          *\n");
-        printf("*                 3.Rechercher un livre par son nom.             *\n");
-        printf("*                 4.Mettre a jour la quantite d'un livre.        *\n");
-        printf("*                 5.Supprimer un livre.                          *\n");
-        printf("*                 6.Afficher le nombre total de livres.          *\n");
-        printf("*                 7.Sortie the program.                          *\n");
-        printf("******************************************************************\n");
+    printf("\n");
+    printf("\n");
+    printf("Donnez le titre du livre que vous souhaitez modifier : ");
+    fgets(titre, sizeof(titre), stdin);
+    titre[strcspn(titre, "\n")] = '\0';
 
-        scanf("%d", &choix);
-        cleanInputBuffer();
-        
-        switch (choix)
-            {
-            case 1:
-                printf("Ajouter un livre.\n");
-                addBook();
-                break;
-            case 2:
-                printf("Listez tous les livres disponibles.\n");
-                listBooks();
-                break;
-            case 3:
-                printf("Rechercher un livre par son nom.\n");
-                searchForABook();
-                break;
-            case 4:
-                printf("Mettre à jour la quantite d'un livre.\n");
-                break;
-            case 5:
-                printf("Supprimer un livre.\n");
-                deleteBook();
-                break;
-            case 6:
-                printf("Afficher le nombre total de livres.\n");
-                showTotalBooks();
-                break;
-            case 7:
-                printf("Sortie.\n");
-                breakIt = true;
-                break;
-                
-            default:
-                printf("Input Invalide.\n");
-                break;
-            }
-    } while (!breakIt);
+    while(books[i].autheur[0] != '\0' && i < MAX_BOOKS_NUMBER){
+        count++;
+        if(stringCompare(books[i].titre, titre)){
+            found = true;
+            break;
+        }
+        i++;
+    }
 
-    return 0;
+    if(!found && count == 0){
+        printf("La bibliotheque est vide !!\n");
+        return;
+    }else if (!found){
+        printf("le titre du livre n'a pas pu etre trouve.\n");
+        return;
+    }
+    printf("Quelle est la nouvelle quantite du livre selectionne : ");
+    scanf("%d", &newQuantity);
+    cleanInputBuffer();
+
+    books[i].quantite = newQuantity;
+
+    printf("La quantit a ete modifiee pour le livre intitule : %s", books[i].titre);
 }
+
