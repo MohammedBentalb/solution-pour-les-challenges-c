@@ -227,6 +227,9 @@ void deleteBook(){
     int count = 0;
     bool found = false;
 
+    printf("\n");
+    printf("\n");
+    
     printf("Ecrivez le titre du livre que vous souhaitez supprimer : ");
     fgets(titre, sizeof(titre), stdin);
 
@@ -273,7 +276,9 @@ void showTotalBooks(){
         printf("la bibliotheque est vide");
         return;
     }
-
+    printf("\n");
+    printf("\n");
+    
     printf("La quantite de livres disponibles dans la bibliotheque est : %d", total);
 
 }
@@ -285,6 +290,7 @@ void changeQuantity(){
     
     printf("\n");
     printf("\n");
+    
     printf("Donnez le titre du livre que vous souhaitez modifier : ");
     fgets(titre, sizeof(titre), stdin);
     titre[strcspn(titre, "\n")] = '\0';
