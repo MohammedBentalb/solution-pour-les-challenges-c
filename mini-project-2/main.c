@@ -47,11 +47,13 @@ int main(){
                             UpdateContact(3);
                             break;
                         default:
+                            printf("Invalid Data\n");
                             break;
                     }
                     break;
                 case 3:
                     printf("---> Delete a contact.\n");
+                    deleteContact();
                     break;
                 case 4:
                     printf("---> List all contact.\n");

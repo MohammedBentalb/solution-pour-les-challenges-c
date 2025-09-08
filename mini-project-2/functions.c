@@ -123,6 +123,7 @@ void updateContact(int choice){
 }
 
 void deleteContact(){
+
     char contactName[MAX_CHARACTER];
     int i = 0, count = 0;
     bool found = false;
@@ -155,3 +156,32 @@ void deleteContact(){
     printf("The itended contact have been deleted!!!\n");
     printf("\n");
 }
+
+void listAllContacts(){
+
+    int i = 0;
+
+    while(i < MAX_CONTACTS && contactList[i].contactName[0] != '\n'){
+        printf("\n");
+        printf("-------------------------------------------------\n");
+        printf("Contact N°: %d", i + 1);
+        printf("Contact name: %s", contactList[i].contactName);
+        printf("Contact number: %s", contactList[i].number);
+        printf("Contact email adress: %s", contactList[i].email);
+        printf("-------------------------------------------------\n");
+        printf("\n");
+        i++;
+    }
+
+    if(i == 0){
+        printf("Contact list is empty!!");
+        return;
+    }
+
+    printf("All contacts have been listed!!\n");
+    printf("\n");
+
+}
+
+
+
