@@ -3,7 +3,8 @@
 
 int main (){
     bool breakIt = false;
-    int choix = 0;
+    int choix = 0, searchChoice = 0, sortChoice = 0, asceChoice = 0;
+    char isbn[20] = {0};
     
     do {
         printf("\n");
@@ -26,31 +27,57 @@ int main (){
         switch (choix)
             {
             case 1:
-                printf("Ajouter un livre.\n");
+                printf("-->Ajouter un livre.\n");
                 addBook();
                 break;
             case 2:
-                printf("Listez tous les livres disponibles.\n");
+                printf("-->Listez tous les livres disponibles.\n");
+                printf("   1.Sort By title.\n   2.Sort by quantity.\n   3.Sort By ISBN.\n");
+                scanf("%d", &sortChoice);
+                cleanInputBuffer();
+
+                printf("      1.ascending.\n      2.descending.\n");
+                scanf("%d", &asceChoice);
+                cleanInputBuffer();
+                
+                sortingBooks(sortChoice, asceChoice == 1);
                 listBooks();
                 break;
             case 3:
-                printf("Rechercher un livre par son nom.\n");
-                searchForBook();
+                printf("-->Chercher un livre.\n");
+                printf("   1.Chercher par son nom.\n   2.Chercher par son ISBN.\n");
+                scanf("%d", &searchChoice);
+                cleanInputBuffer();
+
+                switch(searchChoice){
+                    case 1:
+                        searchForBook();
+                    break;
+                    case 2:
+                        printf("   Write the book's ISBN: \n");
+                        fgets(isbn, sizeof(isbn), stdin);
+                        isbn[strcspn(isbn, "\n")] = '\0';
+                        
+                        searchByIsbn(isbn);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 4:
-                printf("Mettre à jour la quantite d'un livre.\n");
+                printf("-->Mettre à jour la quantite d'un livre.\n");
                 changeQuantity();
                 break;
             case 5:
-                printf("Supprimer un livre.\n");
+                printf("-->Supprimer un livre.\n");
                 deleteBook();
                 break;
             case 6:
-                printf("Afficher le nombre total de livres.\n");
+                printf("-->Afficher le nombre total de livres.\n");
                 showTotalBooks();
                 break;
             case 7:
-                printf("Sortie.\n");
+                printf("-->Sortie.\n");
                 breakIt = true;
                 break;
                 
