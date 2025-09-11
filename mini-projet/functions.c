@@ -313,6 +313,7 @@ int binarySearch(char target[], int size){
             i++;
         }
         
+        
         return -1;
     }
 
